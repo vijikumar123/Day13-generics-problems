@@ -1,59 +1,39 @@
 package com.bridgelabz.day13;
 
-public class Generics  {
-    static void max_variables(String str1, String str2, String str3){
-        if(str1.compareTo(str2) > 0){
-            if(str1.compareTo(str3) > 0){
-                System.out.println( str1 + " is Maximum of three strings ");
-            }else {
-                System.out.println( str3 + " is Maximum of three strings ");
-            }
-        }else{
-            if(str2.compareTo(str3) > 0){
-                System.out.println( str2 + " is Maximum of three strings ");
-            }else{
-                System.out.println( str3 + " is Maximum of three strings ");
-            }
-        }
-    }
-    static void max_variables(Integer num1, Integer num2, Integer num3){
-        if(num1.compareTo(num2) > 0){
-            if(num1.compareTo(num3) > 0){
-                System.out.println( num1 + " is Maximum of three integers ");
-            }else {
-                System.out.println( num3 + " is Maximum of three integers ");
-            }
-        }else{
-            if(num2.compareTo(num3) > 0){
-                System.out.println( num2 + " is Maximum of three integers ");
-            }else{
-                System.out.println( num3 + " is Maximum of three integers ");
-            }
-        }
+public class Generics  <T extends Comparable> {
+    T[] array;
+
+    Generics(T[] arr1) {
+        this.array = arr1;
     }
 
-    static void max_variables(Float num1, Float num2, Float num3){
-        if(num1.compareTo(num2) > 0){
-            if(num1.compareTo(num3) > 0){
-                System.out.println( num1 + " is Maximum of three float numbers ");
-            }else {
-                System.out.println( num3 + " is Maximum of three float numbers ");
-            }
-        }else{
-            if(num2.compareTo(num3) > 0){
-                System.out.println( num2 + " is Maximum of three float numbers ");
-            }else{
-                System.out.println( num3 + " is Maximum of three float numbers ");
+    void max_variables(){
+        T largest = this.array[0];
+        for (int i=0; i<this.array.length; i++){
+            if(this.array[i].compareTo(largest) > 0){
+                largest = this.array[i];
+                this.array[i] = largest;
             }
         }
+        System.out.println(" Largest element in the array is " + largest);
     }
 
     public static void main(String[] args) {
-        max_variables(10,500,99);
-        max_variables(6.1f,1.8f,70f);
-        max_variables("Orange", "WaterMelon", "Banana");
+        Integer[] int_arr = {14,77,11,1,56};
+        Generics <Integer> obj1 = new Generics(int_arr);
+        obj1.max_variables();
+
+        String[] st_arr = {"Banana", "Apple", "Orange","Pineapple","Greps"};
+        Generics <String> obj2 = new Generics(st_arr);
+        obj2.max_variables();
+
+        Float[] float_arr = {25.1f, 4.3f, 7.1f};
+        Generics <Float> obj3 = new Generics(float_arr);
+        obj3.max_variables();
     }
 }
+
+
 
 
 
